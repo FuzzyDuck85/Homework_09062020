@@ -11,6 +11,8 @@ describe('Park', function() {
   let dinosaur5;
   let dinosaur6;
   let dinosaur7;
+  let dinosaur8;
+  let dinosaur9;
 
   let park;
 
@@ -22,6 +24,8 @@ describe('Park', function() {
     dinosaur5 = new Dinosaur('Parasaurolophus','herbivore', 14)
     dinosaur6 = new Dinosaur('Triceratops','herbivore', 38)
     dinosaur7 = new Dinosaur('Velociraptor','carnivore', 51)
+    dinosaur8 = new Dinosaur('Velociraptor','carnivore', 51)
+    dinosaur9 = new Dinosaur('Velociraptor','carnivore', 51)
 
     park = new Park('Jurassic Park', 125);
   })
@@ -49,7 +53,9 @@ describe('Park', function() {
     park.addDinosaur(dinosaur5);
     park.addDinosaur(dinosaur6);
     park.addDinosaur(dinosaur7);
-    const expected = [dinosaur1, dinosaur2, dinosaur3, dinosaur4, dinosaur5, dinosaur6, dinosaur7];
+    park.addDinosaur(dinosaur8);
+    park.addDinosaur(dinosaur9);
+    const expected = [dinosaur1, dinosaur2, dinosaur3, dinosaur4, dinosaur5, dinosaur6, dinosaur7, dinosaur8, dinosaur9];
     assert.deepStrictEqual(park.dinosaurs, expected);
   });
 
@@ -57,18 +63,77 @@ describe('Park', function() {
     park.addDinosaur(dinosaur1);
     park.addDinosaur(dinosaur2);
     park.removeDinosaur(dinosaur1);
-    const actual = park.dinosaurs.includes(dinosaur1);
-    assert.strictEqual(actual, false);
+    const expected = park.dinosaurs.includes(dinosaur1);
+    assert.strictEqual(expected, false);
   });
 
-  it('should be able to find the dinosaur that attracts the most visitors');
+  it('should be able to find the dinosaur that attracts the most visitors', function(){
+    park.addDinosaur(dinosaur1);
+    park.addDinosaur(dinosaur2);
+    park.addDinosaur(dinosaur3);
+    park.addDinosaur(dinosaur4);
+    park.addDinosaur(dinosaur5);
+    park.addDinosaur(dinosaur6);
+    park.addDinosaur(dinosaur7);
+    park.addDinosaur(dinosaur8);
+    park.addDinosaur(dinosaur9);
+    const expected = park.mostVisitors()
+    assert.strictEqual(expected, dinosaur7)
+  });
 
-  it('should be able to find all dinosaurs of a particular species');
+  it('should be able to find all dinosaurs of a particular species', function(){
+    park.addDinosaur(dinosaur1);
+    park.addDinosaur(dinosaur2);
+    park.addDinosaur(dinosaur3);
+    park.addDinosaur(dinosaur4);
+    park.addDinosaur(dinosaur5);
+    park.addDinosaur(dinosaur6);
+    park.addDinosaur(dinosaur7);
+    park.addDinosaur(dinosaur8);
+    park.addDinosaur(dinosaur9);
+    const expected = park.findDinosaurBySpecies('Velociraptor');
+    assert.strictEqual(expected.length, 3)
+  });
 
-  it('should be able to calculate the total number of visitors per day');
+  it('should be able to calculate the total number of visitors per day', function(){
+    park.addDinosaur(dinosaur1);
+    park.addDinosaur(dinosaur2);
+    park.addDinosaur(dinosaur3);
+    park.addDinosaur(dinosaur4);
+    park.addDinosaur(dinosaur5);
+    park.addDinosaur(dinosaur6);
+    park.addDinosaur(dinosaur7);
+    park.addDinosaur(dinosaur8);
+    park.addDinosaur(dinosaur9);
+    const actual = park.guestsPerDay();
+    assert.strictEqual(actual, 342);
+  });
 
-  it('should be able to calculate the total number of visitors per year');
+  it('should be able to calculate the total number of visitors per year', function(){
+    park.addDinosaur(dinosaur1);
+    park.addDinosaur(dinosaur2);
+    park.addDinosaur(dinosaur3);
+    park.addDinosaur(dinosaur4);
+    park.addDinosaur(dinosaur5);
+    park.addDinosaur(dinosaur6);
+    park.addDinosaur(dinosaur7);
+    park.addDinosaur(dinosaur8);
+    park.addDinosaur(dinosaur9);
+    const actual = park.guestsPerYear();
+    assert.strictEqual(actual, 124830);
+  });
 
-  it('should be able to calculate total revenue for one year');
-
+  it('should be able to calculate total revenue for one year', function(){
+    park.addDinosaur(dinosaur1);
+    park.addDinosaur(dinosaur2);
+    park.addDinosaur(dinosaur3);
+    park.addDinosaur(dinosaur4);
+    park.addDinosaur(dinosaur5);
+    park.addDinosaur(dinosaur6);
+    park.addDinosaur(dinosaur7);
+    park.addDinosaur(dinosaur8);
+    park.addDinosaur(dinosaur9);
+    const actual = park.totalAnnualRevenue();
+    assert.strictEqual(actual, 15603750)
+  });
 });
