@@ -12,6 +12,10 @@ Park.prototype.removeDinosaur = function(dinosaur){
   this.dinosaurs.splice(indexOfDinosaur, 1);
 }
 
+Park.prototype.dingyDinosaur = function(dinosaur){
+  this.dinosaurs.shift(dinosaur);
+}
+
 
 Park.prototype.mostVisitors = function(){
   let most_popular = 0;
@@ -22,6 +26,18 @@ Park.prototype.mostVisitors = function(){
   }
   return this.dinosaurs[most_popular];
 };
+
+Park.prototype.findMostAttractiveDinosaur = function () {
+  let mostAttractiveDino = this.dinosaurs[0];
+
+  for (const dino of this.dinosaurs) {
+    if (dino.guestsAttractedPerDay > mostAttractiveDino.guestsAttractedPerDay) {
+      mostAttractiveDino = dino;
+    }
+  }
+
+  return mostAttractiveDino;
+}
 
 Park.prototype.findDinosaurBySpecies = function(species){
   let found = [];
@@ -48,5 +64,28 @@ Park.prototype.guestsPerYear = function(){
 Park.prototype.totalAnnualRevenue = function(){
   return this.guestsPerYear() * this.ticketPrice;
 };
+
+Park.prototype.removeSpecies = function(species){
+  let newDinos = [];
+  for(dino of this.dinosaurs){
+    if(dino.species != species){
+      newDinos.push(dino)
+    };
+  };
+  this.dinosaurs = newDinos;
+};
+
+Park.prototype.numberOfDiets = function(){
+  let dietObject = {};
+  for(dino of this.dinosaurs){
+    if(!Object.keys(dietObject).includes(dino.diet)){
+      dietObject[dino.diet] = 1;
+    }else{
+      dietObject[dino.diet] += 1;
+    }
+  }
+  return dietObject;
+}
+
 
 module.exports = Park;

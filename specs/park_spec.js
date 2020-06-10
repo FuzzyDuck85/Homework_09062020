@@ -23,9 +23,9 @@ describe('Park', function() {
     dinosaur4 = new Dinosaur('Gallimimus','omnivore', 10)
     dinosaur5 = new Dinosaur('Parasaurolophus','herbivore', 14)
     dinosaur6 = new Dinosaur('Triceratops','herbivore', 38)
-    dinosaur7 = new Dinosaur('Velociraptor','carnivore', 51)
+    dinosaur7 = new Dinosaur('Velociraptor','carnivore', 54)
     dinosaur8 = new Dinosaur('Velociraptor','carnivore', 51)
-    dinosaur9 = new Dinosaur('Velociraptor','carnivore', 51)
+    dinosaur9 = new Dinosaur('Velociraptor','carnivore', 48)
 
     park = new Park('Jurassic Park', 125);
   })
@@ -67,6 +67,12 @@ describe('Park', function() {
     assert.strictEqual(expected, false);
   });
 
+  it('should be able to remove a specific dinosaur from its collection', function(){
+    park.addDinosaur(dinosaur1);
+    park.dingyDinosaur(dinosaur1);
+    assert.deepStrictEqual([], park.dinosaurs);
+  });
+
   it('should be able to find the dinosaur that attracts the most visitors', function(){
     park.addDinosaur(dinosaur1);
     park.addDinosaur(dinosaur2);
@@ -78,7 +84,15 @@ describe('Park', function() {
     park.addDinosaur(dinosaur8);
     park.addDinosaur(dinosaur9);
     const expected = park.mostVisitors()
-    assert.strictEqual(expected, dinosaur7)
+    assert.deepStrictEqual(expected, dinosaur7)
+  });
+
+  it('should be able to find the most popular dinosaur that attracts the most visitors', function(){
+    park.addDinosaur(dinosaur1);
+    park.addDinosaur(dinosaur2);
+    park.addDinosaur(dinosaur3);
+    const actual = park.findMostAttractiveDinosaur();
+        assert.deepStrictEqual(actual, dinosaur7);
   });
 
   it('should be able to find all dinosaurs of a particular species', function(){
@@ -92,7 +106,7 @@ describe('Park', function() {
     park.addDinosaur(dinosaur8);
     park.addDinosaur(dinosaur9);
     const expected = park.findDinosaurBySpecies('Velociraptor');
-    assert.strictEqual(expected.length, 3)
+    assert.deepStrictEqual(expected.length, 3)
   });
 
   it('should be able to calculate the total number of visitors per day', function(){
@@ -136,4 +150,44 @@ describe('Park', function() {
     const actual = park.totalAnnualRevenue();
     assert.strictEqual(actual, 15603750)
   });
+
+  it('should be able to remove all dinosaurs of a particular species', function(){
+    park.addDinosaur(dinosaur1);
+    park.addDinosaur(dinosaur2);
+    park.addDinosaur(dinosaur3);
+    park.addDinosaur(dinosaur4);
+    park.addDinosaur(dinosaur5);
+    park.addDinosaur(dinosaur6);
+    park.addDinosaur(dinosaur7);
+    park.addDinosaur(dinosaur8);
+    park.addDinosaur(dinosaur9);
+    park.removeSpecies("Velociraptor")
+    assert.strictEqual(6, park.dinosaurs.length)
+  })
+
+  it('should be able to returnan object of numbers of diet types', function(){
+    park.addDinosaur(dinosaur1);
+    park.addDinosaur(dinosaur2);
+    park.addDinosaur(dinosaur3);
+    park.addDinosaur(dinosaur4);
+    park.addDinosaur(dinosaur5);
+    park.addDinosaur(dinosaur6);
+    park.addDinosaur(dinosaur7);
+    park.addDinosaur(dinosaur8);
+    park.addDinosaur(dinosaur9);
+    const actual = park.numberOfDiets();
+    const expected = ({"herbivore": 3, "carnivore": 5, "omnivore": 1})
+    assert.deepStrictEqual(actual, expected);
+  })
+
 });
+
+
+
+
+
+
+
+
+
+////
